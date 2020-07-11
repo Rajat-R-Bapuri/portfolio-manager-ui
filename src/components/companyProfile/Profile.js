@@ -1,5 +1,4 @@
-import React, { createRef } from "react";
-import classes from "./Profile.module.css";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Link, Paper, Grid, Button } from "@material-ui/core";
 

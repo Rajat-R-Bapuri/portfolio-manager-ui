@@ -1,0 +1,69 @@
+.up {
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: up;
+  animation-duration: 3s;
+  animation-name: up;
+}
+@-webkit-keyframes up {
+  from {
+    color: green;
+  }
+  to {
+    color: black;
+  }
+}
+@keyframes up {
+  from {
+    color: green;
+  }
+  to {
+    color: black;
+  }
+}
+
+.down {
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: down;
+  animation-duration: 3s;
+  animation-name: down;
+}
+@-webkit-keyframes down {
+  from {
+    color: red;
+  }
+  to {
+    color: black;
+  }
+}
+@keyframes down {
+  from {
+    color: red;
+  }
+  to {
+    color: black;
+  }
+}
+
+.same {
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: same;
+  animation-duration: 3s;
+  animation-name: same;
+}
+
+@-webkit-keyframes same {
+  from {
+    color: orange;
+  }
+  to {
+    color: black;
+  }
+}
+@keyframes same {
+  from {
+    color: orange;
+  }
+  to {
+    color: black;
+  }
+}
