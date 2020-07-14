@@ -36,12 +36,18 @@ class News extends React.Component {
     let data = [];
     for (let i = 0; i < news.length; i++) {
       const item = news[i];
-      data.push({
-        title: item.getElementsByTagName("description")[0].innerHTML,
-        link: item.getElementsByTagName("link")[0].innerHTML,
-        date: new Date(item.getElementsByTagName("pubDate")[0].innerHTML),
-        source: item.getElementsByTagName("source")[0].innerHTML,
-      });
+      let title = item
+        .getElementsByTagName("description")[0]
+        .innerHTML.split("&gt;");
+
+      if (title.length == 5) {
+        data.push({
+          title: title[1].slice(0, title[1].length - 6),
+          link: item.getElementsByTagName("link")[0].innerHTML,
+          date: new Date(item.getElementsByTagName("pubDate")[0].innerHTML),
+          source: item.getElementsByTagName("source")[0].innerHTML,
+        });
+      }
     }
 
     data.sort((a, b) => b.date - a.date);
@@ -61,7 +67,10 @@ class News extends React.Component {
 
       return (
         <div>
-          <Typography className={mClasses.title}> AAPL in the News</Typography>
+          <Typography className={mClasses.title}>
+            {" "}
+            {this.state.query} in the News
+          </Typography>
           <Grid container spacing={3}>
             {this.state.data.map((item) => {
               return (

@@ -22,14 +22,12 @@ const styles = (theme) => ({
 class NewsCard extends React.Component {
   render() {
     const mClasses = this.props.classes;
-    let title = this.props.title.split("&gt;")[1];
-    title = title.slice(0, title.length - 6);
 
     return (
       <Paper elevation={15} className={mClasses.root}>
         <Typography className={mClasses.title} gutterBottom>
           <Link href={this.props.link} target="_external" color="inherit">
-            {title}
+            {this.props.title}
           </Link>
         </Typography>
 
