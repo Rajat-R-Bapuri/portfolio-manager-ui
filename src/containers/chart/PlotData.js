@@ -3,6 +3,7 @@ import Chart from "chart.js";
 import StockPrice from "../stockPrice/StockPrice";
 import classes from "./LineGraph.module.css";
 import stockPriceClasses from "../stockPrice/StockPrice.module.css";
+import Paper from "@material-ui/core/Paper";
 
 class PlotData extends React.Component {
   constructor(props) {
@@ -25,9 +26,6 @@ class PlotData extends React.Component {
     this.stockChartRef = this.chartRef.current.getContext("2d");
     this.buildChart();
     this.sse.onmessage = (e) => {
-      //   console.log(e.data);
-      // console.log(e.data["AAPL"].price);
-      //   console.log(this.state);
       this.setState((prevState, props) => {
         const nextPrice = JSON.parse(e.data)[this.state.symbol].price.toFixed(
           2
@@ -88,6 +86,7 @@ class PlotData extends React.Component {
       .then((data) => {
         let sData = data["data"];
         if (sData.length) {
+          this.setState({ price: sData[sData.length - 1].price.toFixed(2) });
           sData.forEach((obj, ind) => {
             let respTime = new Date(obj.timestamp);
             let roundedTimestamp = new Date(
@@ -163,7 +162,7 @@ class PlotData extends React.Component {
 
   render() {
     return (
-      <div className={classes.graphContainer}>
+      <Paper className={classes.graphContainer} elevation={20}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <StockPrice
             symbol={this.state.symbol}
@@ -172,7 +171,7 @@ class PlotData extends React.Component {
           />
         </div>
         <canvas className={classes.chart} id="myChart" ref={this.chartRef} />
-      </div>
+      </Paper>
     );
   }
 }
