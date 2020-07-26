@@ -40,7 +40,7 @@ class News extends React.Component {
         .getElementsByTagName("description")[0]
         .innerHTML.split("&gt;");
 
-      if (title.length == 5) {
+      if (title.length === 5) {
         data.push({
           title: title[1].slice(0, title[1].length - 6),
           link: item.getElementsByTagName("link")[0].innerHTML,
