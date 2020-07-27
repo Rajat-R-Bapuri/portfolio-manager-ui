@@ -4,36 +4,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { GoogleLogin } from "react-google-login";
-
-const styles = (theme) => ({
-  root: {
-    minHeight: "90vh",
-  },
-  emailSignInButton: {
-    fontSize: "18px",
-    margin: "10px",
-    width: "300px",
-    color: "black",
-    backgroundColor: "white",
-  },
-  googleSignInGridItem: {
-    margin: "10px",
-    width: "500px",
-    display: "flex",
-    justifyContent: "center",
-  },
-  title: {
-    fontFamily: "monospace",
-    margin: theme.spacing(3),
-    fontSize: theme.spacing(4.5),
-  },
-  signUpText: { justifyContent: "center", display: "flex" },
-  gButton: {
-    width: "300px !important",
-    display: "flex !important",
-    justifyContent: "center !important",
-  },
-});
+import styles from "./styles";
 
 class Login extends React.Component {
   responseGoogle = (response) => {
@@ -69,7 +40,7 @@ class Login extends React.Component {
         </Grid>
         <Grid item xs={12} className={mClasses.googleSignInGridItem}>
           <GoogleLogin
-            clientId="220834486328-i2pa7u34h83nnoosurup6bq2do2v7dps.apps.googleusercontent.com"
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             buttonText="Google Sign In"
             onSuccess={this.responseGoogle}
             onFailure={this.responseGoogle}
