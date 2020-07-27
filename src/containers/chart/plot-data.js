@@ -1,6 +1,6 @@
 import React, { createRef } from "react";
 import Chart from "chart.js";
-import StockPrice from "../stockPrice/StockPrice";
+import StockPrice from "../stock-price/stock-price";
 import classes from "./LineGraph.module.css";
 import stockPriceClasses from "../stockPrice/StockPrice.module.css";
 import Paper from "@material-ui/core/Paper";

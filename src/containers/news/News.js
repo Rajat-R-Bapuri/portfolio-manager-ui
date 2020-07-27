@@ -1,13 +1,12 @@
 import React from "react";
-import NewsCard from "./NewsCard";
+import NewsCard from "../../components/news-card/news-card";
 import { withStyles } from "@material-ui/core/styles";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Slide } from "@material-ui/core";
 
 const styles = (theme) => ({
   title: {
     fontFamily: "monospace",
     margin: "auto",
-    margin: theme.spacing(3),
     fontSize: theme.spacing(5),
   },
 });
@@ -68,23 +67,30 @@ class News extends React.Component {
       return (
         <div>
           <Typography className={mClasses.title}>
-            {" "}
             {this.state.query} in the News
           </Typography>
-          <Grid container spacing={3}>
-            {this.state.data.map((item) => {
-              return (
-                <Grid key={Math.random().toString()} item xs={6}>
-                  <NewsCard
-                    title={item.title}
-                    link={item.link}
-                    date={item.date.toString()}
-                    source={item.source}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
+          <Slide
+            direction="up"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={500}
+          >
+            <Grid container spacing={3}>
+              {this.state.data.map((item) => {
+                return (
+                  <Grid key={Math.random().toString()} item xs={6}>
+                    <NewsCard
+                      title={item.title}
+                      link={item.link}
+                      date={item.date.toString()}
+                      source={item.source}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Slide>
         </div>
       );
     }
