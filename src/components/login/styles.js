@@ -1,4 +1,4 @@
-const styles = (theme) => ({
+export default (theme) => ({
   root: {
     minHeight: "90vh",
   },
@@ -27,5 +27,3 @@ const styles = (theme) => ({
     justifyContent: "center !important",
   },
 });
-
-export default styles;
