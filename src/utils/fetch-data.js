@@ -1,11 +1,10 @@
 import { userProfileLoaded } from "../actions";
+import Cookies from "js-cookie";
 
 function fetchUserProfile() {
-  const jwt =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWphdC5yLmJhcHVyaUBnbWFpbC5jb20iLCJpYXQiOjE1OTU3OTkwMzksImV4cCI6MTU5NjE1OTAzOX0.CnybwmL7v-LiXO4QwTuwwK0udYwj3F_ENPO0A2wd78E";
-
+  const jwt = Cookies.get("jwt");
   return (dispatch) =>
-    fetch(`http://localhost:8080/users/profile`, {
+    fetch(`${process.env.REACT_APP_BACKEND_API}/users/profile`, {
       method: "GET",
       headers: {
         Accept: "application/json",

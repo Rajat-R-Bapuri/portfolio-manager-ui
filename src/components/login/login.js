@@ -5,6 +5,9 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { GoogleLogin } from "react-google-login";
 import styles from "./styles";
+import handleGoogleLoginResponse from "../../utils/login-handler";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class Login extends React.Component {
   responseGoogle = (response) => {
@@ -13,7 +16,9 @@ class Login extends React.Component {
 
   render() {
     const mClasses = this.props.classes;
-    return (
+    return this.props.loggedIn ? (
+      this.props.history.push("/")
+    ) : (
       <Grid
         container
         spacing={0}
@@ -42,8 +47,12 @@ class Login extends React.Component {
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             buttonText="Google Sign In"
-            onSuccess={this.responseGoogle}
-            onFailure={this.responseGoogle}
+            onSuccess={(resp) =>
+              this.props.dispatch(handleGoogleLoginResponse(resp))
+            }
+            onFailure={(resp) =>
+              this.props.dispatch(handleGoogleLoginResponse(resp))
+            }
             cookiePolicy={"single_host_origin"}
             className={mClasses.gButton}
           />
@@ -53,4 +62,12 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(Login);
+function mapStateToProps(state) {
+  return {
+    loggedIn: state.loginReducer.loggedIn,
+  };
+}
+
+export default connect(mapStateToProps)(
+  withRouter(withStyles(styles, { withTheme: true })(Login))
+);
