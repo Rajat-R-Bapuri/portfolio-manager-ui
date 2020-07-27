@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PlotData from "./containers/chart/PlotData";
+import PlotData from "./containers/chart/plot-data";
 import ComapanyProfile from "./components/company-profile/company-profile";
 import UserProfile from "./containers/user-profile/user-profile";
 import Login from "./components/login/login";

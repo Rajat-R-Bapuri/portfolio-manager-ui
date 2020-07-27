@@ -1,8 +1,8 @@
 import React, { createRef } from "react";
 import Chart from "chart.js";
 import StockPrice from "../stock-price/stock-price";
-import classes from "./LineGraph.module.css";
-import stockPriceClasses from "../stockPrice/StockPrice.module.css";
+import classes from "./line-graph.module.css";
+import stockPriceClasses from "../stock-price/stock-price.module.css";
 import Paper from "@material-ui/core/Paper";
 
 class PlotData extends React.Component {

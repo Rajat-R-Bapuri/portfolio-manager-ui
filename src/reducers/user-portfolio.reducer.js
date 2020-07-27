@@ -1,5 +1,5 @@
 import produce from "immer";
-import { USER_PROFILE_LOADED } from "../actions/actionTypes";
+import { USER_PROFILE_LOADED } from "../actions/action-types";
 
 const initialState = {
   profile: {},
