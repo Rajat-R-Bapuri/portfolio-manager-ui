@@ -8,6 +8,7 @@ import styles from "./styles";
 import handleGoogleLoginResponse from "../../utils/login-handler";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class Login extends React.Component {
   responseGoogle = (response) => {
@@ -16,8 +17,9 @@ class Login extends React.Component {
 
   render() {
     const mClasses = this.props.classes;
+    console.log(this.props.loggedIn);
     return this.props.loggedIn ? (
-      this.props.history.push("/")
+      <Redirect to={"/"} />
     ) : (
       <Grid
         container

@@ -8,7 +8,7 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import fetchUserProfile from "../../utils/fetch-data";
+import fetchUserProfile from "../../utils/fetch-user-data";
 import { connect } from "react-redux";
 import Zoom from "@material-ui/core/Zoom";
 

@@ -1,4 +1,4 @@
-import { userProfileLoaded } from "../actions";
+import { userProfileLoaded, unauthorized } from "../actions";
 import Cookies from "js-cookie";
 
 function fetchUserProfile() {
@@ -14,6 +14,9 @@ function fetchUserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
+        if ("error" in data) {
+          return dispatch(unauthorized());
+        }
         return dispatch(userProfileLoaded(data));
       })
       .catch((err) => console.log(err));

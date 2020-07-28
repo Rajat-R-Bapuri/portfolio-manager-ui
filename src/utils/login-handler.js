@@ -1,6 +1,5 @@
 import { userLoggedIn, userLoggedOut } from "../actions/login-actions";
 import Cookies from "js-cookie";
-import { dispatch } from "d3";
 
 export default function handleGoogleLoginResponse(response) {
   console.log("resp", response);
