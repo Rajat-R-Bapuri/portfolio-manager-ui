@@ -2,7 +2,6 @@ import { userLoggedIn, userLoggedOut } from "../actions/login-actions";
 import Cookies from "js-cookie";
 
 export default function handleGoogleLoginResponse(response) {
-  console.log("resp", response);
   if ("error" in response) {
     // there was an error logging in
     return (dispatch) => dispatch(userLoggedOut());

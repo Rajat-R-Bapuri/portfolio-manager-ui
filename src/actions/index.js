@@ -6,3 +6,9 @@ export function userProfileLoaded(payload) {
     payload,
   };
 }
+
+export function unauthorized() {
+  return {
+    type: actions.USER_PROFILE_LOAD_FAILED,
+  };
+}

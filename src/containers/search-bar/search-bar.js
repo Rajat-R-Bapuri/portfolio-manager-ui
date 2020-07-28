@@ -3,10 +3,11 @@ import { withStyles } from "@material-ui/core/styles";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import TextField from "@material-ui/core/TextField";
 import { Grid, Typography, Paper, Button, IconButton } from "@material-ui/core";
-import queryString from "query-string";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Slide from "@material-ui/core/Slide";
+import { connect } from "react-redux";
+import getSymbols from "../../utils/stocks-handler";
 
 const styles = (theme) => ({
   root: {
@@ -20,14 +21,13 @@ class SearchBar extends React.Component {
     this.state = {
       dropDownState: false,
       query: null,
-      dropdownData: [],
     };
   }
 
   handleClick = (event) => {
     if (event.target.value.length > 0) {
       this.setState({ query: event.target.value, dropDownState: true });
-      this.fetchDropdown(event.target.value);
+      this.props.dispatch(getSymbols(event.target.value));
     } else {
       this.setState({ dropDownState: false });
     }
@@ -35,26 +35,6 @@ class SearchBar extends React.Component {
 
   handleClickAway = () => {
     this.setState({ dropDownState: false });
-  };
-
-  jwt = "";
-
-  fetchDropdown = (query) => {
-    const url = queryString.stringifyUrl({
-      url: process.env.REACT_APP_BACKEND_API + "/stocks/symbols",
-      query: {
-        query: query.toUpperCase(),
-      },
-    });
-    const headers = new Headers();
-    headers.append("Authorization", `Bearer ${this.jwt}`);
-    fetch(url, {
-      headers: headers,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ dropdownData: data });
-      });
   };
 
   handleAdd = (id, event) => {
@@ -69,12 +49,11 @@ class SearchBar extends React.Component {
   };
 
   renderDropdown = () => {
-    console.log(this.state.dropdownData);
-    if (this.state.dropdownData) {
+    if (this.props.dropdownData) {
       return (
         <Slide direction="up" in={true} mountOnEnter unmountOnExit>
           <Grid container spacing={1}>
-            {this.state.dropdownData.map((item) => {
+            {this.props.dropdownData.map((item) => {
               return (
                 <Grid key={item.symbol} item xs={12}>
                   <Paper
@@ -120,4 +99,13 @@ class SearchBar extends React.Component {
     );
   }
 }
-export default withStyles(styles, { withTheme: true })(SearchBar);
+
+function mapStateToProps(state) {
+  return {
+    dropdownData: state.stocksSymbolsReducer.symbols,
+  };
+}
+
+export default connect(mapStateToProps)(
+  withStyles(styles, { withTheme: true })(SearchBar)
+);

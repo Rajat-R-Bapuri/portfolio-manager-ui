@@ -50,7 +50,6 @@ class UserProfile extends React.Component {
 
   renderProfile() {
     const mClasses = this.props.classes;
-    console.log(this.props.profile);
     return (
       <Zoom in={true} timeout={1000}>
         <Grid container spacing={2} className={mClasses.root}>

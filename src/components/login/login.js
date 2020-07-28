@@ -11,13 +11,8 @@ import { withRouter } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
 class Login extends React.Component {
-  responseGoogle = (response) => {
-    console.log(response);
-  };
-
   render() {
     const mClasses = this.props.classes;
-    console.log(this.props.loggedIn);
     return this.props.loggedIn ? (
       <Redirect to={"/"} />
     ) : (
