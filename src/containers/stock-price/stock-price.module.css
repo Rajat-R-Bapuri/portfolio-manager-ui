@@ -6,7 +6,7 @@
 }
 @-webkit-keyframes up {
   from {
-    color: green;
+    color: #66ff00;
   }
   to {
     color: black;
@@ -14,7 +14,7 @@
 }
 @keyframes up {
   from {
-    color: green;
+    color: #66ff00;
   }
   to {
     color: black;
