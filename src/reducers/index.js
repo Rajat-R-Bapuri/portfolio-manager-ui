@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import userReducer from "./user-portfolio.reducer";
 import loginReducer from "./login.reducer";
 import stocksSymbolsReducer from "./stocks.reducer";
+import userReducer from "./user-portfolio.reducer";
 
 export default combineReducers({
   userReducer,

@@ -10,3 +10,6 @@ export const STOCK_NEWS_LOADED = "stockNewsLoaded";
 export const STOCK_HISTORY_LOADED = "stockHistoryLoaded";
 export const STOCKS_SYMBOLS_LOADED = "stocksSymbolsLoaded";
 export const STOCKS_PRICES_RECEIVED = "stocksPricesReceived";
+
+export const ADD_TO_WATCHLIST = "addToWatchlist";
+export const REMOVE_FROM_WATCHLIST = "removeFromWatchlist";
