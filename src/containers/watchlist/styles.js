@@ -5,7 +5,7 @@ export default (theme) => ({
   container: {
     marginTop: "20px",
     justifyContent: "center",
-    padding: "20px",
+    padding: "10px",
   },
   messageGrid: {
     display: "flex",
