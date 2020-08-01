@@ -1,19 +1,14 @@
-import React from "react";
+import { ClickAwayListener, Grid, Slide, TextField } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import TextField from "@material-ui/core/TextField";
-import { Grid, Typography, Paper, Button, IconButton } from "@material-ui/core";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Slide from "@material-ui/core/Slide";
+import React from "react";
 import { connect } from "react-redux";
-import getSymbols from "../../utils/stocks-handler";
-
-const styles = (theme) => ({
-  root: {
-    width: "100%",
-  },
-});
+import StockListItem from "../../components/search-bar-stock-list-item/search-bar-stock-list-item";
+import { getSymbols } from "../../utils/stocks-handler";
+import {
+  addToWatchlist,
+  removeFromWatchlist,
+} from "../../utils/update-watchlist";
+import styles from "./styles";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -25,9 +20,14 @@ class SearchBar extends React.Component {
   }
 
   handleClick = (event) => {
+    console.log(event);
     if (event.target.value.length > 0) {
-      this.setState({ query: event.target.value, dropDownState: true });
-      this.props.dispatch(getSymbols(event.target.value));
+      if (event.type === "change") {
+        this.setState({ query: event.target.value, dropDownState: true });
+        this.props.dispatch(getSymbols(event.target.value));
+      } else {
+        this.setState({ dropDownState: true });
+      }
     } else {
       this.setState({ dropDownState: false });
     }
@@ -38,63 +38,66 @@ class SearchBar extends React.Component {
   };
 
   handleAdd = (id, event) => {
-    // console.log(id, event.currentTarget, event.target.nodeName);
     const addSet = new Set(["BUTTON", "svg", "path"]);
     if (addSet.has(event.target.nodeName)) {
-      console.log("add button");
+      if (this.props.watchlist.has(id)) {
+        // remove from watchlist
+        this.props.dispatch(removeFromWatchlist(id));
+      } else {
+        // add to watchlist
+        this.props.dispatch(addToWatchlist(id));
+      }
     } else {
       console.log("open stock page");
-      window.location.assign(`/${id}`);
+      // window.location.assign(`/${id}`);
     }
   };
 
-  renderDropdown = () => {
+  renderStocksList = () => {
     if (this.props.dropdownData) {
-      return (
-        <Slide direction="up" in={true} mountOnEnter unmountOnExit>
-          <Grid container spacing={1}>
-            {this.props.dropdownData.map((item) => {
-              return (
-                <Grid key={item.symbol} item xs={12}>
-                  <Paper
-                    id={item.symbol}
-                    elevation={1}
-                    style={{ padding: "20px", cursor: "pointer" }}
-                    onClick={(event) => this.handleAdd(item.symbol, event)}
-                  >
-                    <Typography>{item.symbol}</Typography>
-                    <Typography color="textSecondary">{item.name}</Typography>
-                    <IconButton>
-                      {/* TODO: check profile */}
-                      {item.symbol.length > 4 ? (
-                        <AddCircleIcon style={{ color: "green" }} />
-                      ) : (
-                        <DeleteIcon color="secondary" />
-                      )}
-                    </IconButton>
-                  </Paper>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Slide>
-      );
+      return this.props.dropdownData.map((item, index) => {
+        return (
+          <Slide
+            key={index}
+            direction="up"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+          >
+            <Grid
+              item
+              xs={12}
+              className={this.props.classes.stockListItem}
+              key={item.symbol}
+            >
+              <StockListItem
+                symbol={item.symbol}
+                name={item.name}
+                handleAdd={this.handleAdd}
+                status={this.props.watchlist.has(item.symbol)}
+              />
+            </Grid>
+          </Slide>
+        );
+      });
     }
   };
+
   render() {
-    const mClasses = this.props.classes;
     return (
       <ClickAwayListener onClickAway={this.handleClickAway}>
-        <div>
-          <TextField
-            id="outlined-basic"
-            label="Search"
-            variant="outlined"
-            onChange={this.handleClick}
-            onFocus={this.handleClick}
-          />
-          {this.state.dropDownState ? this.renderDropdown() : null}
-        </div>
+        <Grid container spacing={1}>
+          <Grid item xs={12} key={"TextfieldGrid"}>
+            <TextField
+              label="Search for Stocks"
+              variant="outlined"
+              onChange={this.handleClick}
+              onFocus={this.handleClick}
+              className={this.props.classes.textField}
+            />
+          </Grid>
+          {this.state.dropDownState ? this.renderStocksList() : null}
+        </Grid>
       </ClickAwayListener>
     );
   }
@@ -103,6 +106,7 @@ class SearchBar extends React.Component {
 function mapStateToProps(state) {
   return {
     dropdownData: state.stocksSymbolsReducer.symbols,
+    watchlist: new Set(state.userReducer.profile.watchlist),
   };
 }
 
