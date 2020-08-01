@@ -1,8 +1,8 @@
+import { Box, Paper, Typography, withStyles } from "@material-ui/core";
 import React from "react";
-import styles from "./styles";
 import { connect } from "react-redux";
-import { Paper, Typography, Box, withStyles } from "@material-ui/core";
 import stockPriceClasses from "../../containers/stock-price/stock-price.module.css";
+import styles from "./styles";
 
 class DashoardStockPrice extends React.Component {
   getPriceClass = (nextPrice) => {
