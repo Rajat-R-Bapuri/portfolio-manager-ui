@@ -1,11 +1,11 @@
+import { Box, Grid, withStyles } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
-import styles from "./styles";
+import fetchUserProfile from "../../utils/fetch-user-data";
 import SearchBar from "../search-bar/search-bar";
 import Watchlist from "../watchlist/watchlist";
-import fetchUserProfile from "../../utils/fetch-user-data";
-import { withStyles } from "@material-ui/core";
-import News from "../news/news";
+import styles from "./styles";
+// import News from "../news/news";
 
 class DashBoard extends React.Component {
   componentDidMount() {
@@ -14,11 +14,19 @@ class DashBoard extends React.Component {
 
   getDashboardComponents() {
     return (
-      <div>
-        <SearchBar />
-        <Watchlist />
-        <News query={"Stocks"} />
-      </div>
+      <Box borderRadius={25} borderBottom={1} boxShadow={2}>
+        <Grid container spacing={0} className={this.props.classes.root}>
+          <Grid item xs={6}>
+            <div>
+              <SearchBar />
+            </div>
+          </Grid>
+          <Grid item xs={6} style={{ padding: "5px" }}>
+            <Watchlist />
+          </Grid>
+          {/* <News query={"Stocks"} /> */}
+        </Grid>
+      </Box>
     );
   }
 
