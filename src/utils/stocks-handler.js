@@ -1,9 +1,10 @@
 import Cookies from "js-cookie";
-import {
-  stocksSymbolsLoaded,
-  stocksPricesReceived,
-} from "../actions/stocks-actions";
 import queryString from "query-string";
+import {
+  popularStocksReceived,
+  stocksPricesReceived,
+  stocksSymbolsLoaded,
+} from "../actions/stocks-actions";
 
 function getSymbols(query) {
   return (dispatch) => {
@@ -49,4 +50,25 @@ function getCurrentPrices(query) {
   };
 }
 
-export { getSymbols, getCurrentPrices };
+function getPopularStocks() {
+  return (dispatch) => {
+    const jwt = Cookies.get("jwt");
+    const url = queryString.stringifyUrl(
+      {
+        url: process.env.REACT_APP_BACKEND_API + "/stocks/symbols/popular",
+      },
+      {
+        encode: false,
+      }
+    );
+    const headers = new Headers();
+    headers.append("Authorization", `Bearer ${jwt}`);
+    fetch(url, {
+      headers: headers,
+    })
+      .then((response) => response.json())
+      .then((data) => dispatch(popularStocksReceived(data)));
+  };
+}
+
+export { getSymbols, getCurrentPrices, getPopularStocks };

@@ -11,5 +11,10 @@ export default (theme) => ({
   stockListItem: {
     display: "flex",
     justifyContent: "center",
+    width: "100%",
+  },
+  popularStocksText: {
+    marginTop: "15px",
+    fontSize: "20px",
   },
 });

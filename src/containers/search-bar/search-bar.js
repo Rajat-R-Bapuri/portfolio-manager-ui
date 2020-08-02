@@ -1,4 +1,10 @@
-import { ClickAwayListener, Grid, Slide, TextField } from "@material-ui/core";
+import {
+  ClickAwayListener,
+  Grid,
+  Slide,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import React from "react";
 import { connect } from "react-redux";
@@ -53,9 +59,21 @@ class SearchBar extends React.Component {
     }
   };
 
-  renderStocksList = () => {
-    if (this.props.dropdownData) {
-      return this.props.dropdownData.map((item, index) => {
+  renderList = (list, heading = null) => {
+    const header = (
+      <div
+        key={"popularStockSymbols"}
+        className={this.props.classes.stockListItem}
+      >
+        <Typography className={this.props.classes.popularStocksText}>
+          {heading ? heading : "\u00A0"}
+        </Typography>
+      </div>
+    );
+
+    return [
+      header,
+      list.map((item, index) => {
         return (
           <Slide
             key={index}
@@ -79,7 +97,19 @@ class SearchBar extends React.Component {
             </Grid>
           </Slide>
         );
-      });
+      }),
+    ];
+  };
+
+  renderPopularStocks = () => {
+    if (this.props.popularStocks) {
+      return this.renderList(this.props.popularStocks, "Popular Stock Symbols");
+    }
+  };
+
+  renderStocksList = () => {
+    if (this.props.dropdownData.length) {
+      return this.renderList(this.props.dropdownData);
     }
   };
 
@@ -96,7 +126,9 @@ class SearchBar extends React.Component {
               className={this.props.classes.textField}
             />
           </Grid>
-          {this.state.dropDownState ? this.renderStocksList() : null}
+          {this.state.dropDownState
+            ? this.renderStocksList()
+            : this.renderPopularStocks()}
         </Grid>
       </ClickAwayListener>
     );
@@ -107,6 +139,7 @@ function mapStateToProps(state) {
   return {
     dropdownData: state.stocksSymbolsReducer.symbols,
     watchlist: new Set(state.userReducer.profile.watchlist),
+    popularStocks: state.stocksSymbolsReducer.popularStocks,
   };
 }
 

@@ -2,6 +2,7 @@ import { Box, Grid, withStyles } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import fetchUserProfile from "../../utils/fetch-user-data";
+import { getPopularStocks } from "../../utils/stocks-handler";
 import SearchBar from "../search-bar/search-bar";
 import Watchlist from "../watchlist/watchlist";
 import styles from "./styles";
@@ -10,6 +11,7 @@ import styles from "./styles";
 class DashBoard extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchUserProfile());
+    this.props.dispatch(getPopularStocks());
   }
 
   getDashboardComponents() {
