@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import stockPriceClasses from "../../containers/stock-price/stock-price.module.css";
 import styles from "./styles";
 
-class DashoardStockPrice extends React.Component {
+class WatchlistStockPrice extends React.Component {
   getPriceClass = (nextPrice) => {
     if (this.prevPrice < nextPrice) {
       return stockPriceClasses.up;
@@ -47,5 +47,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps)(
-  withStyles(styles, { withTheme: true })(DashoardStockPrice)
+  withStyles(styles, { withTheme: true })(WatchlistStockPrice)
 );

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { stocksPricesReceived } from "../../actions/stocks-actions";
-import DashoardStockPrice from "../../components/dashboard-stock-price/dashboard-stock-price";
+import DashoardStockPrice from "../../components/watchlist-stock-price/watchlist-stock-price";
 import { getCurrentPrices } from "../../utils/stocks-handler";
 import styles from "./styles";
 
