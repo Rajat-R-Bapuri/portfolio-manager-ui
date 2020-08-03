@@ -1,15 +1,8 @@
+import { Grid, Slide, Typography } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 import React from "react";
 import NewsCard from "../../components/news-card/news-card";
-import { withStyles } from "@material-ui/core/styles";
-import { Grid, Typography, Slide } from "@material-ui/core";
-
-const styles = (theme) => ({
-  title: {
-    fontFamily: "monospace",
-    margin: "auto",
-    fontSize: theme.spacing(5),
-  },
-});
+import styles from "./styles";
 
 class News extends React.Component {
   constructor(props) {
@@ -79,7 +72,13 @@ class News extends React.Component {
             <Grid container spacing={3}>
               {this.state.data.map((item) => {
                 return (
-                  <Grid key={Math.random().toString()} item xs={6}>
+                  <Grid
+                    key={Math.random().toString()}
+                    item
+                    xs={12}
+                    lg={6}
+                    md={6}
+                  >
                     <NewsCard
                       title={item.title}
                       link={item.link}

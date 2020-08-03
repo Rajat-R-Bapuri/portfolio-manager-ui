@@ -3,10 +3,10 @@ import React from "react";
 import { connect } from "react-redux";
 import fetchUserProfile from "../../utils/fetch-user-data";
 import { getPopularStocks } from "../../utils/stocks-handler";
+// import News from "../news/news";
 import SearchBar from "../search-bar/search-bar";
 import Watchlist from "../watchlist/watchlist";
 import styles from "./styles";
-// import News from "../news/news";
 
 class DashBoard extends React.Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class DashBoard extends React.Component {
 
   getDashboardComponents() {
     return (
-      <Box borderRadius={25} borderBottom={1} boxShadow={2}>
+      <Box borderRadius={25} boxShadow={20}>
         <Grid container spacing={0} className={this.props.classes.root}>
           <Grid item lg={6} sm={12} xs={12}>
             <div>

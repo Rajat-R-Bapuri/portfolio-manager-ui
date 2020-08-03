@@ -11,7 +11,7 @@ export default (theme) => ({
     padding: "10px",
   },
   container: {
-    marginTop: "20px",
+    marginTop: "10px",
     display: "flex",
     justifyContent: "center",
     padding: "10px",
