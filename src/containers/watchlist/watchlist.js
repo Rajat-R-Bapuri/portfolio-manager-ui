@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { stocksPricesReceived } from "../../actions/stocks-actions";
-import DashoardStockPrice from "../../components/watchlist-stock-price/watchlist-stock-price";
+import WatchlistStockPrice from "../../components/watchlist-stock-price/watchlist-stock-price";
 import { getCurrentPrices } from "../../utils/stocks-handler";
 import styles from "./styles";
 
@@ -52,14 +52,28 @@ class Watchlist extends Component {
     if (this.props.watchlist.length) {
       this.props.watchlist.map((symbol, index) =>
         list.push(
-          <Grid key={index} item xs={12}>
-            <DashoardStockPrice key={symbol} symbol={symbol} />
+          <Grid
+            key={index}
+            item
+            xs={12}
+            lg={12}
+            sm={12}
+            className={this.props.classes.gridItem}
+          >
+            <WatchlistStockPrice key={symbol} symbol={symbol} />
           </Grid>
         )
       );
     } else {
       list.push(
-        <Grid key={0} item xs={12} className={this.props.classes.messageGrid}>
+        <Grid
+          key={0}
+          item
+          xs={12}
+          lg={12}
+          sm={12}
+          className={this.props.classes.messageGrid}
+        >
           <Typography className={this.props.classes.message}>
             It seems like your watchlist is empty. Search for Stock Tickers and
             add them to your watchlist
@@ -73,12 +87,20 @@ class Watchlist extends Component {
   render() {
     const mClasses = this.props.classes;
     return (
-      <Paper elevation={5} className={mClasses.root}>
-        <Grid container spacing={2} className={mClasses.container}>
-          <Typography variant={"h4"}>Your Watchlist</Typography>
+      <Grid container spacing={2} className={mClasses.container}>
+        <Paper elevation={5} className={mClasses.paper}>
+          <Grid
+            key={0}
+            item
+            xs={12}
+            lg={12}
+            className={this.props.classes.messageGrid}
+          >
+            <Typography variant={"h5"}>Your Watchlist</Typography>
+          </Grid>
           {this.createList()}
-        </Grid>
-      </Paper>
+        </Paper>
+      </Grid>
     );
   }
 }

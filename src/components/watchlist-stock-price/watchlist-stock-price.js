@@ -24,7 +24,7 @@ class WatchlistStockPrice extends React.Component {
     }
     const mClasses = this.props.classes;
     return (
-      <Paper style={{ borderRadius: "10px" }}>
+      <Paper style={{ borderRadius: "10px", minWidth: "80%" }}>
         {this.props.data !== undefined ? (
           <Typography component="div" className={mClasses.root}>
             <Box className={mClasses.symbol}>{this.props.symbol} </Box>

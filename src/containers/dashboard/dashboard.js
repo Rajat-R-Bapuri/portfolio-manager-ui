@@ -18,12 +18,12 @@ class DashBoard extends React.Component {
     return (
       <Box borderRadius={25} borderBottom={1} boxShadow={2}>
         <Grid container spacing={0} className={this.props.classes.root}>
-          <Grid item xs={6}>
+          <Grid item lg={6} sm={12} xs={12}>
             <div>
               <SearchBar />
             </div>
           </Grid>
-          <Grid item xs={6} style={{ padding: "5px" }}>
+          <Grid item lg={6} sm={12} xs={12}>
             <Watchlist />
           </Grid>
           {/* <News query={"Stocks"} /> */}

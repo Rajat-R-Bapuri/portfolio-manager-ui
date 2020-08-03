@@ -1,9 +1,18 @@
 export default (theme) => ({
-  root: {
-    marginTop: "20px",
+  paper: {
+    padding: "10px",
+    justifyContent: "center",
+    border: "1px solid yellow",
+    minWidth: "70%",
+  },
+  gridItem: {
+    display: "flex",
+    justifyContent: "center",
+    padding: "10px",
   },
   container: {
     marginTop: "20px",
+    display: "flex",
     justifyContent: "center",
     padding: "10px",
   },

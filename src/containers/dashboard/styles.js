@@ -1,5 +1,6 @@
 export default (theme) => ({
   root: {
-    height: "75vh",
+    height: "100%",
+    padding: "15px",
   },
 });

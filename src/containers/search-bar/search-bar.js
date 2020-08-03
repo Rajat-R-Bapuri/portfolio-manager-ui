@@ -26,7 +26,6 @@ class SearchBar extends React.Component {
   }
 
   handleClick = (event) => {
-    console.log(event);
     if (event.target.value.length > 0) {
       if (event.type === "change") {
         this.setState({ query: event.target.value, dropDownState: true });
