@@ -1,7 +1,9 @@
 import { Grid, Slide, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import React from "react";
+import { connect } from "react-redux";
 import NewsCard from "../../components/news-card/news-card";
+import fetchNews from "../../utils/fetch-news";
 import styles from "./styles";
 
 class News extends React.Component {
@@ -48,11 +50,15 @@ class News extends React.Component {
   };
 
   componentDidMount() {
-    this.getNews();
+    if (this.state.data === null) {
+      console.log("dispactch");
+      this.props.dispatch(fetchNews(this.state.query));
+    }
   }
 
   render() {
-    if (!this.state.data) {
+    console.log(this.state);
+    if (!this.props.data) {
       return <h3>Loading...</h3>;
     } else {
       const mClasses = this.props.classes;
@@ -69,8 +75,8 @@ class News extends React.Component {
             unmountOnExit
             timeout={500}
           >
-            <Grid container spacing={3}>
-              {this.state.data.map((item) => {
+            <Grid container spacing={3} style={{ flexGrow: 1 }}>
+              {this.props.data.map((item) => {
                 return (
                   <Grid
                     key={Math.random().toString()}
@@ -80,10 +86,12 @@ class News extends React.Component {
                     md={6}
                   >
                     <NewsCard
-                      title={item.title}
-                      link={item.link}
-                      date={item.date.toString()}
+                      title={item.headline}
+                      link={item.url}
+                      date={new Date(item.datetime * 1000).toString()}
                       source={item.source}
+                      image={item.image}
+                      summary={item.summary}
                     />
                   </Grid>
                 );
@@ -96,4 +104,13 @@ class News extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(News);
+function mapStateToProps(state, ownProps) {
+  console.log("new props", state.newsReducer);
+  return {
+    data: state.newsReducer[ownProps.query],
+  };
+}
+
+export default connect(mapStateToProps)(
+  withStyles(styles, { withTheme: true })(News)
+);

@@ -9,6 +9,8 @@ export default (theme) => ({
       minHeight: "fit-content",
     },
     borderRadius: "20px",
+    display: "flex",
+    justifyContent: "space-between",
   },
   title: {
     fontSize: 18,
