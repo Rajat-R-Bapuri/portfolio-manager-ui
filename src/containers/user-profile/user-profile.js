@@ -1,47 +1,17 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
 import {
-  Paper,
-  Grid,
-  CircularProgress,
   Avatar,
-  Typography,
   Button,
+  CircularProgress,
+  Grid,
+  Paper,
+  Typography,
 } from "@material-ui/core";
-import fetchUserProfile from "../../utils/fetch-user-data";
-import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core/styles";
 import Zoom from "@material-ui/core/Zoom";
-
-const styles = (theme) => ({
-  root: {
-    marginTop: "50px",
-  },
-  imageGridItem: {
-    display: "flex",
-    margin: "auto",
-    justifyContent: "center",
-  },
-  image: {
-    width: "50%",
-    height: "50%",
-  },
-  gridItems: {
-    padding: "15px",
-    margin: "5px",
-  },
-  title: {
-    fontSize: "25px",
-  },
-  content: {
-    marginTop: "10px",
-    fontSize: "18px",
-  },
-  updateButtonGrid: {
-    display: "flex",
-    margin: "auto",
-    justifyContent: "center",
-  },
-});
+import React from "react";
+import { connect } from "react-redux";
+import fetchUserProfile from "../../utils/fetch-user-data";
+import styles from "./styles";
 
 class UserProfile extends React.Component {
   componentDidMount() {
