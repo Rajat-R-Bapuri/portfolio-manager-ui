@@ -2,6 +2,7 @@ import {
   POPULAR_STOCK_SYMBOLS_LOADED,
   STOCKS_PRICES_RECEIVED,
   STOCKS_SYMBOLS_LOADED,
+  STOCK_HISTORY_LOADED,
 } from "./action-types";
 
 export function stocksSymbolsLoaded(payload) {
@@ -21,6 +22,13 @@ export function stocksPricesReceived(payload) {
 export function popularStocksReceived(payload) {
   return {
     type: POPULAR_STOCK_SYMBOLS_LOADED,
+    payload,
+  };
+}
+
+export function stockHistoryLoaded(payload) {
+  return {
+    type: STOCK_HISTORY_LOADED,
     payload,
   };
 }
