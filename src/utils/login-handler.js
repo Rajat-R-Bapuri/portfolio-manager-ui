@@ -1,5 +1,5 @@
-import { userLoggedIn, userLoggedOut } from "../actions/login-actions";
 import Cookies from "js-cookie";
+import { userLoggedIn, userLoggedOut } from "../actions/login-actions";
 
 export default function handleGoogleLoginResponse(response) {
   if ("error" in response) {

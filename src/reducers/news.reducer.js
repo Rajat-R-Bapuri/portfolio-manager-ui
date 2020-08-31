@@ -4,7 +4,6 @@ import { NEWS_LOADED } from "../actions/action-types";
 const initialState = {};
 
 const newsReducer = (state = initialState, action) => {
-  console.log(action);
   return produce(state, (draft) => {
     switch (action.type) {
       case NEWS_LOADED:

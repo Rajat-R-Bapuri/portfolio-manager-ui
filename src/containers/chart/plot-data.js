@@ -1,9 +1,9 @@
-import React, { createRef } from "react";
-import Chart from "chart.js";
-import StockPrice from "../stock-price/stock-price";
-import classes from "./line-graph.module.css";
-import stockPriceClasses from "../stock-price/stock-price.module.css";
 import Paper from "@material-ui/core/Paper";
+import Chart from "chart.js";
+import React, { createRef } from "react";
+import StockPrice from "../stock-price/stock-price";
+import stockPriceClasses from "../stock-price/stock-price.module.css";
+import classes from "./line-graph.module.css";
 
 class PlotData extends React.Component {
   constructor(props) {

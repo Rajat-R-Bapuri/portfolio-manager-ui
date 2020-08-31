@@ -1,5 +1,5 @@
-import { userProfileLoaded, unauthorized } from "../actions";
 import Cookies from "js-cookie";
+import { unauthorized, userProfileLoaded } from "../actions";
 
 function fetchUserProfile() {
   const jwt = Cookies.get("jwt");
