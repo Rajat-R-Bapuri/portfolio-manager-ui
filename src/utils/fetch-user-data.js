@@ -17,6 +17,7 @@ function fetchUserProfile() {
         if ("error" in data) {
           return dispatch(unauthorized());
         }
+        console.log(data);
         return dispatch(userProfileLoaded(data));
       })
       .catch((err) => console.log(err));

@@ -105,7 +105,6 @@ class News extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log("new props", state.newsReducer);
   return {
     data: state.newsReducer[ownProps.query],
   };

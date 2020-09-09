@@ -17,20 +17,21 @@ class WatchlistStockPrice extends React.Component {
 
   render() {
     let priceClass = stockPriceClasses.same;
-    if (this.props.data !== undefined) {
-      const curPrice = this.props.data.price.toFixed(3);
+    if (this.props.data !== null) {
+      console.log(this.props.data, typeof this.props.data[0]);
+      const curPrice = parseFloat(this.props.data[0]).toFixed(2);
       priceClass = this.getPriceClass(curPrice);
       this.prevPrice = curPrice;
     }
     const mClasses = this.props.classes;
     return (
       <Paper style={{ borderRadius: "10px", minWidth: "80%" }}>
-        {this.props.data !== undefined ? (
+        {this.props.data !== null ? (
           <Typography component="div" className={mClasses.root}>
             <Box className={mClasses.symbol}>{this.props.symbol} </Box>
             <Box border={1} borderRadius={5} className={mClasses.priceBox}>
               <span key={Math.random()} className={priceClass}>
-                ${this.props.data.price.toFixed(2)}
+                ${parseFloat(this.props.data[0]).toFixed(2)}
               </span>
             </Box>
           </Typography>
@@ -41,8 +42,12 @@ class WatchlistStockPrice extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  let data = null;
+  if (state.stocksReducer.prices[ownProps.symbol] !== undefined) {
+    data = JSON.parse(state.stocksReducer.prices[ownProps.symbol]);
+  }
   return {
-    data: state.stocksReducer.prices[ownProps.symbol],
+    data,
   };
 }
 
